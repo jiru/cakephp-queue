@@ -242,13 +242,13 @@ class QueueProcessesTable extends Table {
 			->enableHydration(false)
 			->all()
 			->toArray();
-		/** @var array<array{modified: \Cake\I18n\DateTime}> $results */
 
 		if (!$results) {
 			return [];
 		}
 
 		$count = count($results);
+		/** @var array{modified: \Cake\I18n\DateTime} $record */
 		$record = array_shift($results);
 		/** @var \Cake\I18n\DateTime $time */
 		$time = $record['modified'];
