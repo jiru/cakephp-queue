@@ -100,7 +100,7 @@ class QueueProcessesController extends QueueAppController {
 			$queueProcess->terminate = true;
 			$this->QueueProcesses->saveOrFail($queueProcess);
 			$this->Flash->success(__d('queue', 'The queue process has been deleted.'));
-		} catch (Exception $exception) {
+		} catch (Exception) {
 			$this->Flash->error(__d('queue', 'The queue process could not be deleted. Please, try again.'));
 		}
 

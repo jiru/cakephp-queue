@@ -407,7 +407,7 @@ class QueuedJobsController extends QueueAppController {
 		$taskFinder = new TaskFinder();
 		$allTasks = $taskFinder->all();
 		$tasks = [];
-		foreach ($allTasks as $task => $className) {
+		foreach (array_keys($allTasks) as $task) {
 			if (!str_starts_with($task, 'Queue.')) {
 				continue;
 			}
@@ -458,7 +458,7 @@ class QueuedJobsController extends QueueAppController {
 			->toArray();
 
 		$tasks = [];
-		foreach ($allTasks as $task => $className) {
+		foreach (array_keys($allTasks) as $task) {
 			if (!str_starts_with($task, 'Queue.')) {
 				continue;
 			}

@@ -36,11 +36,8 @@ class QueueHelper extends Helper {
 
 		// Requeued
 		$taskConfig = $this->taskConfig($queuedJob->job_task);
-		if ($taskConfig && $queuedJob->attempts <= $taskConfig['retries']) {
-			return false;
-		}
 
-		return true;
+		return !($taskConfig && $queuedJob->attempts <= $taskConfig['retries']);
 	}
 
 	/**
@@ -85,11 +82,8 @@ class QueueHelper extends Helper {
 		}
 
 		$taskConfig = $this->taskConfig($queuedJob->job_task);
-		if ($taskConfig && $queuedJob->attempts <= $taskConfig['retries']) {
-			return true;
-		}
 
-		return false;
+		return $taskConfig && $queuedJob->attempts <= $taskConfig['retries'];
 	}
 
 	/**
@@ -113,11 +107,7 @@ class QueueHelper extends Helper {
 		}
 
 		// Must NOT have a failure_message (it was cleared by reset)
-		if ($queuedJob->failure_message) {
-			return false;
-		}
-
-		return true;
+		return !$queuedJob->failure_message;
 	}
 
 	/**
