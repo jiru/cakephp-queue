@@ -221,6 +221,29 @@ if ($request && $request->getParam('controller') === 'Queue' && $request->getPar
 			color: var(--queue-secondary);
 		}
 
+		.queue-table thead th a {
+			color: inherit;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.35rem;
+			text-decoration: none;
+		}
+
+		.queue-table thead th a.asc,
+		.queue-table thead th a.desc {
+			color: var(--queue-dark);
+		}
+
+		.queue-table thead th a.asc::after {
+			content: "\2191";
+			font-size: 0.875em;
+		}
+
+		.queue-table thead th a.desc::after {
+			content: "\2193";
+			font-size: 0.875em;
+		}
+
 		.queue-table tbody tr:hover {
 			background-color: rgba(13, 110, 253, 0.04);
 		}
