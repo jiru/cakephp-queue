@@ -219,7 +219,9 @@ $stateMeta = [
 	</div>
 	<div class="col-md-3 col-sm-6">
 		<?= $this->element('Queue.Queue/stats_card', [
-			'title' => __d('queue', 'Failed'),
+			// Counts every unfinished job with a failure_message: still-retrying
+			// (requeued) ones as well as terminally failed/aborted ones.
+			'title' => __d('queue', 'Requeued/Failed'),
 			'count' => $failedJobs,
 			'icon' => 'times-circle',
 			'color' => 'danger',
@@ -299,11 +301,6 @@ $stateMeta = [
 											<?php elseif ($this->Queue->isRequeued($pendingJob)): ?>
 												<span class="badge bg-warning text-dark">
 													<i class="fas fa-redo me-1"></i><?= __d('queue', 'Requeued') ?>
-												</span>
-												<div class="small text-muted"><?= __d('queue', 'Attempts') ?>: <?= $this->Queue->attempts($pendingJob) ?></div>
-											<?php elseif ($this->Queue->isRestarted($pendingJob)): ?>
-												<span class="badge bg-info text-dark">
-													<i class="fas fa-sync me-1"></i><?= __d('queue', 'Restarted') ?>
 												</span>
 												<div class="small text-muted"><?= __d('queue', 'Attempts') ?>: <?= $this->Queue->attempts($pendingJob) ?></div>
 											<?php elseif ($pendingJob->fetched): ?>
